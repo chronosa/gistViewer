@@ -1,10 +1,18 @@
 import requests
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route("/ping", methods=['GET'])
+def ping():
+    return "pong"
+
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
+
+@app.route('/query', methods=['GET'])
 def main():
     username = request.args.get('username')
     if not username:
